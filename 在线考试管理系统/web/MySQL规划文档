@@ -1,0 +1,493 @@
+一、MySQL建表
+    1、创建省份表及城市表，城市表需加上省份id，仅供查询
+    2、创建用户信息表，供查询，插入，删除
+    3、创建题目信息表，供查询，插入，删除
+
+
+二、SQL语句
+   1）整体架构：
+       1、创建一个database，systemForExam【帮用户创建】：
+                 create database systemForExam;
+       2、删除systemForExam【测试阶段可使用】：
+                 drop database if exists systemForExam;
+          使用systemForExam：
+                 use systemForExam;
+   2）各表操作：
+         （用户不准操作）
+         【插入前执行下面代码】【重要】
+                  set names 'gbk';
+      1）在systemForExam中创建省份表provinces【结构如下】：
+          pId[int]    pName[varchar()]   abbr[varchar()]    pMainCity[varchar()]
+          语句【不区分大小写】：
+          create table provinces(
+              id int primary key,
+              name varchar(50),
+              abbr varchar(50),
+              mainCity varchar(50)
+          );
+          删除省份表【测试阶段可用】：
+                drop table if exists provinces;
+          在provinces中插入省份数据：
+                            insert into provinces()values(1,'北京','京','北京');
+                            insert into provinces()values(2,'浙江','浙','杭州');
+                            insert into provinces()values(3,'天津','津','天津');
+                            insert into provinces()values(4,'安徽','皖','合肥');
+                            insert into provinces()values(5,'上海','沪','上海');
+                            insert into provinces()values(6,'福建','闽','福州');
+                            insert into provinces()values(7,'重庆','渝','重庆');
+                            insert into provinces()values(8,'江西','赣','南昌');
+                            insert into provinces()values(9,'香港','港','香港');
+                            insert into provinces()values(10,'山东','鲁','济南');
+                            insert into provinces()values(11,'澳门','澳','澳门');
+                            insert into provinces()values(12,'河南','豫','郑州');
+                            insert into provinces()values(13,'内蒙古自治区','蒙','呼和浩特');
+                            insert into provinces()values(14,'湖北','鄂','武汉');
+                            insert into provinces()values(15,'新疆维吾尔自治区','新','乌鲁木齐');
+                            insert into provinces()values(16,'湖南','湘','长沙');
+                            insert into provinces()values(17,'宁夏回族自治区','宁','银川');
+                            insert into provinces()values(18,'广东','粤','广州');
+                            insert into provinces()values(19,'西藏藏族自治区','藏','拉萨');
+                            insert into provinces()values(20,'广西','桂','南宁');
+                            insert into provinces()values(21,'海南','琼','海口');
+                            insert into provinces()values(22,'黑龙江','黑','哈尔滨');
+                            insert into provinces()values(23,'吉林','吉','长春');
+                            insert into provinces()values(24,'辽宁','辽','沈阳');
+                            insert into provinces()values(25,'甘肃','甘','兰州');
+                            insert into provinces()values(26,'河北','冀','石家庄');
+                            insert into provinces()values(27,'陕西','陕','西安');
+                            insert into provinces()values(28,'云南','云','昆明');
+                            insert into provinces()values(29,'贵州','贵','贵阳');
+                            insert into provinces()values(30,'台湾','台','台北');
+                            insert into provinces()values(31,'四川','川','成都');
+                            insert into provinces()values(32,'江苏','苏','南京');
+                            insert into provinces()values(33,'青海','青','西宁');
+                            insert into provinces()values(34,'山西','晋','太原');
+          删除所有数据：
+                            delete from provinces where pid > 0;
+      2）在systemForExam中创建城市表cities【结构如下】:
+           cId[int]      cName[varchar()]      provinceId[int]
+           语句：
+           create table cities(
+               id int primary key,
+               name varchar(50),
+               provinceId int
+           );
+           删除城市表【测试阶段可用】：
+                 drop table if exists cities;
+           在city中插入城市数据：
+                 insert into cities()values(1,'北京市',1);
+                 insert into cities()values(2,'杭州市',2);
+                 insert into cities()values(3,'湖州市',2);
+                 insert into cities()values(4,'绍兴市',2);
+                 insert into cities()values(5,'宁波市',2);
+                 insert into cities()values(6,'嘉兴市',2);
+                 insert into cities()values(7,'丽水市',2);
+                 insert into cities()values(8,'台州市',2);
+                 insert into cities()values(9,'温州市',2);
+                 insert into cities()values(10,'金华市',2);
+                 insert into cities()values(11,'衢州市',2);
+                 insert into cities()values(12,'舟山市',2);
+                 insert into cities()values(13,'天津市',3);
+                 insert into cities()values(14,'合肥市',4);
+                 insert into cities()values(15,'芜湖市',4);
+                 insert into cities()values(16,'蚌埠市',4);
+                 insert into cities()values(17,'淮南市',4);
+                 insert into cities()values(18,'马鞍山市',4);
+                 insert into cities()values(19,'淮北市',4);
+                 insert into cities()values(20,'铜陵市',4);
+                 insert into cities()values(21,'安庆市',4);
+                 insert into cities()values(22,'桐城市',4);
+                 insert into cities()values(23,'黄山市',4);
+                 insert into cities()values(24,'滁州市',4);
+                 insert into cities()values(25,'天长市',4);
+                 insert into cities()values(26,'明光市',4);
+                 insert into cities()values(27,'阜阳市',4);
+                 insert into cities()values(28,'界首市',4);
+                 insert into cities()values(29,'宿州市',4);
+                 insert into cities()values(30,'巢湖市',4);
+                 insert into cities()values(31,'六安市',4);
+                 insert into cities()values(32,'亳州市',4);
+                 insert into cities()values(33,'池州市',4);
+                 insert into cities()values(34,'宣城市',4);
+                 insert into cities()values(35,'宁国市',4);
+                 insert into cities()values(36,'上海市',5);
+                 insert into cities()values(37,'福州市',6);
+                 insert into cities()values(38,'厦门市',6);
+                 insert into cities()values(39,'泉州市',6);
+                 insert into cities()values(40,'漳州市',6);
+                 insert into cities()values(41,'莆田市',6);
+                 insert into cities()values(42,'龙岩市',6);
+                 insert into cities()values(43,'三明市',6);
+                 insert into cities()values(44,'南平市',6);
+                 insert into cities()values(45,'宁德市',6);
+                 insert into cities()values(46,'重庆市',7);
+                 insert into cities()values(47,'南昌市',8);
+                 insert into cities()values(48,'九江市',8);
+                 insert into cities()values(49,'景德镇市',8);
+                 insert into cities()values(50,'萍乡市',8);
+                 insert into cities()values(51,'新余市',8);
+                 insert into cities()values(52,'鹰潭市',8);
+                 insert into cities()values(53,'赣州市',8);
+                 insert into cities()values(54,'宜春市',8);
+                 insert into cities()values(55,'上饶市',8);
+                 insert into cities()values(56,'吉安市',8);
+                 insert into cities()values(57,'抚州市',8);
+                 insert into cities()values(58,'香港市',9);
+                 insert into cities()values(59,'济南市',10);
+                 insert into cities()values(60,'青岛市',10);
+                 insert into cities()values(61,'淄博市',10);
+                 insert into cities()values(62,'枣庄市',10);
+                 insert into cities()values(63,'东营市',10);
+                 insert into cities()values(64,'烟台市',10);
+                 insert into cities()values(65,'潍坊市',10);
+                 insert into cities()values(66,'济宁市',10);
+                 insert into cities()values(67,'泰安市',10);
+                 insert into cities()values(68,'威海市',10);
+                 insert into cities()values(69,'日照市',10);
+                 insert into cities()values(70,'滨州市',10);
+                 insert into cities()values(71,'德州市',10);
+                 insert into cities()values(72,'聊城市',10);
+                 insert into cities()values(73,'临沂市',10);
+                 insert into cities()values(74,'菏泽市',10);
+                 insert into cities()values(75,'莱芜市',10);
+                 insert into cities()values(76,'澳门市',11);
+                 insert into cities()values(77,'开封市',12);
+                 insert into cities()values(78,'洛阳市',12);
+                 insert into cities()values(79,'郑州市',12);
+                 insert into cities()values(80,'平顶山市',12);
+                 insert into cities()values(81,'安阳市',12);
+                 insert into cities()values(82,'鹤壁市',12);
+                 insert into cities()values(83,'新乡市',12);
+                 insert into cities()values(84,'焦作市',12);
+                 insert into cities()values(85,'濮阳市',12);
+                 insert into cities()values(86,'许昌市',12);
+                 insert into cities()values(87,'漯河市',12);
+                 insert into cities()values(88,'三门峡市',12);
+                 insert into cities()values(89,'商丘市',12);
+                 insert into cities()values(90,'周口市',12);
+                 insert into cities()values(91,'南阳市',12);
+                 insert into cities()values(92,'信阳市',12);
+                 insert into cities()values(93,'济源市',12);
+                 insert into cities()values(94,'驻马店市',12);
+                 insert into cities()values(95,'呼和浩特市',13);
+                 insert into cities()values(96,'包头市',13);
+                 insert into cities()values(97,'乌海市',13);
+                 insert into cities()values(98,'赤峰市',13);
+                 insert into cities()values(99,'通辽市',13);
+                 insert into cities()values(100,'鄂尔多斯市',13);
+                 insert into cities()values(101,'呼伦贝尔市',13);
+                 insert into cities()values(102,'巴彦淖尔市',13);
+                 insert into cities()values(103,'乌兰察布市',13);
+                 insert into cities()values(104,'兴安盟',13);
+                 insert into cities()values(105,'锡林郭勒盟',13);
+                 insert into cities()values(106,'阿拉善盟',13);
+                 insert into cities()values(107,'武汉市',14);
+                 insert into cities()values(108,'黄石市',14);
+                 insert into cities()values(109,'十堰市',14);
+                 insert into cities()values(110,'荆州市',14);
+                 insert into cities()values(111,'宜昌市',14);
+                 insert into cities()values(112,'襄阳市',14);
+                 insert into cities()values(113,'鄂州市',14);
+                 insert into cities()values(114,'荆门市',14);
+                 insert into cities()values(115,'孝感市',14);
+                 insert into cities()values(116,'黄冈市',14);
+                 insert into cities()values(117,'咸宁市',14);
+                 insert into cities()values(118,'随州市',14);
+                 insert into cities()values(119,'乌鲁木齐市',15);
+                 insert into cities()values(120,'克拉玛依市',15);
+                 insert into cities()values(121,'吐鲁番市',15);
+                 insert into cities()values(122,'哈密市',15);
+                 insert into cities()values(123,'阿克苏地区',15);
+                 insert into cities()values(124,'喀什地区',15);
+                 insert into cities()values(125,'和田地区',15);
+                 insert into cities()values(126,'昌吉回族自治州',15);
+                 insert into cities()values(127,'博尔塔拉蒙古自治州',15);
+                 insert into cities()values(128,'巴音郭楞蒙古自治州',15);
+                 insert into cities()values(129,'克孜勒苏柯尔克孜自治州',15);
+                 insert into cities()values(130,'长沙市',16);
+                 insert into cities()values(131,'株洲市',16);
+                 insert into cities()values(132,'湘潭市',16);
+                 insert into cities()values(133,'衡阳市',16);
+                 insert into cities()values(134,'邵阳市',16);
+                 insert into cities()values(135,'岳阳市',16);
+                 insert into cities()values(136,'常德市',16);
+                 insert into cities()values(137,'张家界市',16);
+                 insert into cities()values(138,'益阳市',16);
+                 insert into cities()values(139,'娄底市',16);
+                 insert into cities()values(140,'郴州市',16);
+                 insert into cities()values(141,'永州市',16);
+                 insert into cities()values(142,'怀化市',16);
+                 insert into cities()values(143,'湘西土家族苗族自治州',16);
+                 insert into cities()values(144,'银川市',17);
+                 insert into cities()values(145,'石嘴山市',17);
+                 insert into cities()values(146,'吴忠市',17);
+                 insert into cities()values(147,'固原市',17);
+                 insert into cities()values(148,'中卫市',17);
+                 insert into cities()values(149,'广州市',18);
+                 insert into cities()values(150,'深圳市',18);
+                 insert into cities()values(151,'珠海市',18);
+                 insert into cities()values(152,'汕头市',18);
+                 insert into cities()values(153,'佛山市',18);
+                 insert into cities()values(154,'韶关市',18);
+                 insert into cities()values(155,'湛江市',18);
+                 insert into cities()values(156,'肇庆市',18);
+                 insert into cities()values(157,'江门市',18);
+                 insert into cities()values(158,'茂名市',18);
+                 insert into cities()values(159,'惠州市',18);
+                 insert into cities()values(160,'梅州市',18);
+                 insert into cities()values(161,'汕尾市',18);
+                 insert into cities()values(162,'河源市',18);
+                 insert into cities()values(163,'阳江市',18);
+                 insert into cities()values(164,'清远市',18);
+                 insert into cities()values(165,'东莞市',18);
+                 insert into cities()values(166,'中山市',18);
+                 insert into cities()values(167,'潮州市',18);
+                 insert into cities()values(168,'揭阳市',18);
+                 insert into cities()values(169,'云浮市',18);
+                 insert into cities()values(170,'拉萨市',19);
+                 insert into cities()values(171,'日喀则市',19);
+                 insert into cities()values(172,'林芝市',19);
+                 insert into cities()values(173,'昌都市',19);
+                 insert into cities()values(174,'山南市',19);
+                 insert into cities()values(175,'那曲地区',19);
+                 insert into cities()values(176,'阿里地区',19);
+                 insert into cities()values(177,'南宁市',20);
+                 insert into cities()values(178,'柳州市',20);
+                 insert into cities()values(179,'桂林市',20);
+                 insert into cities()values(180,'玉林市',20);
+                 insert into cities()values(181,'北海市',20);
+                 insert into cities()values(182,'梧州市',20);
+                 insert into cities()values(183,'钦州市',20);
+                 insert into cities()values(184,'防城港市',20);
+                 insert into cities()values(185,'贵港市',20);
+                 insert into cities()values(186,'百色市',20);
+                 insert into cities()values(187,'贺州市',20);
+                 insert into cities()values(188,'河池市',20);
+                 insert into cities()values(189,'崇左市',20);
+                 insert into cities()values(190,'来宾市',20);
+                 insert into cities()values(191,'海口市',21);
+                 insert into cities()values(192,'三亚市',21);
+                 insert into cities()values(193,'儋州市',21);
+                 insert into cities()values(194,'三沙市',21);
+                 insert into cities()values(195,'哈尔滨市',22);
+                 insert into cities()values(196,'齐齐哈尔市',22);
+                 insert into cities()values(197,'牡丹江市',22);
+                 insert into cities()values(198,'佳木斯市',22);
+                 insert into cities()values(199,'大庆市',22);
+                 insert into cities()values(200,'鸡西市',22);
+                 insert into cities()values(201,'双鸭山市',22);
+                 insert into cities()values(202,'伊春市',22);
+                 insert into cities()values(203,'七台河市',22);
+                 insert into cities()values(204,'鹤岗市',22);
+                 insert into cities()values(205,'黑河市',22);
+                 insert into cities()values(206,'绥化市',22);
+                 insert into cities()values(207,'长春市',23);
+                 insert into cities()values(208,'吉林市',23);
+                 insert into cities()values(209,'四平市',23);
+                 insert into cities()values(210,'通化市',23);
+                 insert into cities()values(211,'白山市',23);
+                 insert into cities()values(212,'辽源市',23);
+                 insert into cities()values(213,'白城市',23);
+                 insert into cities()values(214,'松原市',23);
+                 insert into cities()values(215,'沈阳市',24);
+                 insert into cities()values(216,'大连市',24);
+                 insert into cities()values(217,'鞍山市',24);
+                 insert into cities()values(218,'抚顺市',24);
+                 insert into cities()values(219,'本溪市',24);
+                 insert into cities()values(220,'丹东市',24);
+                 insert into cities()values(221,'锦州市',24);
+                 insert into cities()values(222,'营口市',24);
+                 insert into cities()values(223,'阜新市',24);
+                 insert into cities()values(224,'辽阳市',24);
+                 insert into cities()values(225,'盘锦市',24);
+                 insert into cities()values(226,'铁岭市',24);
+                 insert into cities()values(227,'朝阳市',24);
+                 insert into cities()values(228,'葫芦岛市',24);
+                 insert into cities()values(229,'兰州市',25);
+                 insert into cities()values(220,'金昌市',25);
+                 insert into cities()values(231,'白银市',25);
+                 insert into cities()values(232,'天水市',25);
+                 insert into cities()values(233,'嘉峪关市',25);
+                 insert into cities()values(234,'张掖市',25);
+                 insert into cities()values(235,'平凉市',25);
+                 insert into cities()values(236,'酒泉市',25);
+                 insert into cities()values(237,'庆阳市',25);
+                 insert into cities()values(238,'定西市',25);
+                 insert into cities()values(239,'陇南市',25);
+                 insert into cities()values(240,'临夏市',25);
+                 insert into cities()values(241,'合作市',25);
+                 insert into cities()values(242,'石家庄',26);
+                 insert into cities()values(243,'邯郸',26);
+                 insert into cities()values(244,'邢台',26);
+                 insert into cities()values(245,'保定',26);
+                 insert into cities()values(246,'张家口',26);
+                 insert into cities()values(247,'承德',26);
+                 insert into cities()values(248,'唐山',26);
+                 insert into cities()values(249,'秦皇岛',26);
+                 insert into cities()values(250,'沧州',26);
+                 insert into cities()values(251,'衡水',26);
+                 insert into cities()values(252,'廊坊',26);
+                 insert into cities()values(253,'西安市',27);
+                 insert into cities()values(254,'宝鸡市',27);
+                 insert into cities()values(255,'咸阳市',27);
+                 insert into cities()values(256,'铜川市',27);
+                 insert into cities()values(257,'渭南市',27);
+                 insert into cities()values(258,'延安市',27);
+                 insert into cities()values(259,'榆林市',27);
+                 insert into cities()values(260,'汉中市',27);
+                 insert into cities()values(261,'安康市',27);
+                 insert into cities()values(262,'商洛市',27);
+                 insert into cities()values(263,'昆明市',28);
+                 insert into cities()values(264,'曲靖市',28);
+                 insert into cities()values(265,'玉溪市',28);
+                 insert into cities()values(266,'丽江市',28);
+                 insert into cities()values(267,'普洱市',28);
+                 insert into cities()values(268,'保山市',28);
+                 insert into cities()values(269,'昭通市',28);
+                 insert into cities()values(270,'临沧市',28);
+                 insert into cities()values(271,'德宏傣族景颇族自治州',28);
+                 insert into cities()values(272,'怒江僳僳族自治州',28);
+                 insert into cities()values(273,'迪庆藏族自治州 ',28);
+                 insert into cities()values(274,'大理白族自治州',28);
+                 insert into cities()values(275,'楚雄彝族自治州',28);
+                 insert into cities()values(276,'红河哈尼族彝族自治州',28);
+                 insert into cities()values(277,'文山壮族苗族自治州',28);
+                 insert into cities()values(278,'西双版纳傣族自治州',28);
+                 insert into cities()values(279,'贵阳市',29);
+                 insert into cities()values(280,'六盘水市',29);
+                 insert into cities()values(281,'遵义市',29);
+                 insert into cities()values(282,'安顺市',29);
+                 insert into cities()values(283,'铜仁市',29);
+                 insert into cities()values(284,'毕节市',29);
+                 insert into cities()values(285,'黔南布依族苗族自治州',29);
+                 insert into cities()values(286,'黔西南布依族苗族自治州',29);
+                 insert into cities()values(287,'贵州黔东南苗族侗族自治州',29);
+                 insert into cities()values(288,'台北市',30);
+                 insert into cities()values(289,'新北市',30);
+                 insert into cities()values(290,'桃园市',30);
+                 insert into cities()values(291,'台中市',30);
+                 insert into cities()values(292,'台南市',30);
+                 insert into cities()values(293,'高雄市',30);
+                 insert into cities()values(294,'成都市',31);
+                 insert into cities()values(295,'绵阳市',31);
+                 insert into cities()values(296,'自贡市',31);
+                 insert into cities()values(297,'攀枝花市',31);
+                 insert into cities()values(298,'泸州市',31);
+                 insert into cities()values(299,'德阳市',31);
+                 insert into cities()values(300,'广元市',31);
+                 insert into cities()values(301,'遂宁市',31);
+                 insert into cities()values(302,'内江市',31);
+                 insert into cities()values(303,'乐山市',31);
+                 insert into cities()values(304,'资阳市',31);
+                 insert into cities()values(305,'宜宾市',31);
+                 insert into cities()values(306,'南充市',31);
+                 insert into cities()values(307,'达州市',31);
+                 insert into cities()values(308,'雅安市',31);
+                 insert into cities()values(309,'广安市',31);
+                 insert into cities()values(310,'巴中市',31);
+                 insert into cities()values(311,'眉山市',31);
+                 insert into cities()values(312,'南京市',32);
+                 insert into cities()values(313,'无锡市',32);
+                 insert into cities()values(314,'徐州市',32);
+                 insert into cities()values(315,'常州市',32);
+                 insert into cities()values(316,'苏州市',32);
+                 insert into cities()values(317,'南通市',32);
+                 insert into cities()values(318,'连云港市',32);
+                 insert into cities()values(319,'淮安市',32);
+                 insert into cities()values(320,'扬州市',32);
+                 insert into cities()values(321,'镇江市',32);
+                 insert into cities()values(322,'泰州市',32);
+                 insert into cities()values(323,'宿迁市',32);
+                 insert into cities()values(324,'西宁市',33);
+                 insert into cities()values(325,'海东市',33);
+                 insert into cities()values(326,'太原市',34);
+                 insert into cities()values(327,'大同市',34);
+                 insert into cities()values(328,'阳泉市',34);
+                 insert into cities()values(339,'长治市',34);
+                 insert into cities()values(330,'晋城市',34);
+                 insert into cities()values(331,'朔州市',34);
+                 insert into cities()values(332,'忻州市',34);
+                 insert into cities()values(333,'晋中市',34);
+                 insert into cities()values(334,'临汾市',34);
+                 insert into cities()values(335,'吕粱市',34);
+                 insert into cities()values(336,'运城市',34);
+      3）在systemForExam中创建用户信息表user()【结构如下】【】
+               【插入前执行下面代码】【重要】
+                                 set names 'gbk';
+                 belong：0表示学生，1表示教师
+                 id[int]    name[varchar(50))]   password[varchar(50)]   area[varchar(50))]  belong[int]
+                 create table user(
+                      id int primary key auto_increment,
+                      name varchar(50),
+                      password varchar(50),
+                      sex char(1),
+                      area varchar(50),
+                      belong char(1)
+                 );
+                 删除用户信息表【调试阶段】：
+                 drop table if exists user;
+                 用户信息插入：
+                 insert into user()values(0,'张三',123,'男','江西南昌市',1);
+                 insert into user()values(0,'赵六',456,'女','山东青岛市',0);
+      4）在systemForExam中创建试题信息表【结构如下】：
+ titleId[int] title[varchar(255)] optionA(varchar(50)) optionB(varchar(50)) optionC(varchar(50)) optionD(varchar(50)) answer[char(1)]
+               包含题目编号，题目，选项A，选项B，选项C，选项D，答案
+               create table title(
+                   titleId int primary key auto_increment,
+                   title varchar(255),
+                   optionA varchar(50),
+                   optionB varchar(50),
+                   optionC varchar(50),
+                   optionD varchar(50),
+                   answer char(1)
+               );
+               删除表【测试使用】：
+               drop table if exists title;
+               随机选择五道题目：
+               select titleId,title,optionA,optionB,optionC,optionD,answer from title order by rand() limit 0,5;
+               试题插入：
+               insert into title()values(0,'试题内容','选项A','选项B','选项C','选项D','A');
+               insert into title()values(0,'','','','','','');
+               insert into title()values(1,'20 * 8 = ?','150','160','170','180','B');
+               insert into title()values(null,'60 - 16 = ?','34','44','24','26','B');
+               insert into title()values(null,'锱铢必较的锱铢读音：','zi zu','zi zhu','zhu zi','zu zhi','B');
+               insert into title()values(null,'hardly是什么词性','名词','动词','形容词','副词','D');
+               //insert into title()values(null,'cos x 的在0 - Π 上的微积分是多少 ?','-1','1','Π','-Π','A');
+               insert into title()values(null,'以下哪一项是礼貌用语？','爷来啦','你丫咋地','欢迎光临里面请','我带你们打','C');
+               insert into title()values(null,'越靠近北极，重力加速度越','大','小','不变','我不知道','B');
+
+      5 ) 学生成绩表创建【额外】：
+              在学生注册时额外登记在此表，保存学生的id，成绩信息。
+              每次完考试插入一条分数，前端可获取该生所有的考试成绩和平均分
+              结构：
+              id[int]  grade[int]
+
+      6 ）教师评语学生表创建【额外 学生可看所有教师给的评语】：
+              在学生注册时额外登记在此表，保存学生的id，姓名，性别信息。另字段：评论字段，评论教师者字段
+
+
+      7）学生评语教师表创建【额外 教师可看所有学生给的评语】：
+              在教师注册时额外登记在此表，保存教师的id，姓名，性别信息。另字段：评论字段 5 段【匿名】
+
+      8 ) 修改 user 表为：teaUser 和 stuUser 两张表
+          teaUser 表中添加字段：基本信息，擅长科目，学位，教书风格
+          stuUser 表中添加字段：个人介绍
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
